@@ -16,24 +16,24 @@ import file8 from "./pads/PAS3GROOVE1.03B.mp3";
 import file9 from "./pads/SilentStar_120_Em_OrganSynth.mp3";
 
 function App() {
-  console.log(file1);
-  const [isPlay, setIsPlay] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [pads, setPads] = useState([
-    file1,
-    file2,
-    file3,
-    file4,
-    file5,
-    file6,
-    file7,
-    file8,
-    file9,
+    { src: file1, name: "funk" },
+    { src: file2, name: "breakbeats" },
+    { src: file3, name: "bass" },
+    { src: file4, name: "electric guitar" },
+    { src: file5, name: "StompySlosh" },
+    { src: file6, name: "Groove" },
+    { src: file7, name: "MazePolitics" },
+    { src: file8, name: "PAS3GROOVE" },
+    { src: file9, name: "SilentStar" },
   ]);
+
   return (
     <div className="App">
       <Header />
-      <Controller setIsPlay={setIsPlay} />
-      <Board pads={pads} isPlay={isPlay} />
+      <Controller setPlaying={setPlaying} playing={playing} />
+      <Board pads={pads} playing={playing} />
     </div>
   );
 }

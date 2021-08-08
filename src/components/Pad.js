@@ -1,42 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-export default function Pad({ src }) {
-  const [state, setState] = useState(false);
-  const [playInLoop, setPlayInLoop] = useState(false);
+export default function Pad({ src, playing, name }) {
+  const [isOn, setIsOn] = useState(false);
 
-  const audioTune = new Audio(src);
+  const audioTune = useRef(new Audio(src));
+
   useEffect(() => {
-    audioTune.load();
+    audioTune.current.load();
   }, []);
+
+  useEffect(() => {
+    if (playing && isOn) {
+      playSound();
+    } else {
+      stopSound();
+    }
+  }, [playing, isOn]);
 
   // play audio sound
   const playSound = () => {
-    audioTune.play();
-    audioTune.loop = true;
-  };
-
-  // pause audio sound
-  const pauseSound = () => {
-    audioTune.pause();
+    audioTune.current.play();
+    audioTune.current.loop = true;
   };
 
   // stop audio sound
   const stopSound = () => {
-    audioTune.pause();
-    audioTune.currentTime = 0;
+    audioTune.current.pause();
+    audioTune.current.currentTime = 0;
   };
+
+  // pause audio sound
+  //   const pauseSound = () => {
+  //     audioTune.pause();
+  //   };
+
   return (
     <div>
-      <button onClick={playSound}>Play</button>
-      <button onClick={pauseSound}>Pause</button>
-      <button onClick={stopSound}>Stop</button>
+      <h4>{name}</h4>
       <label>
         <input
           type="checkbox"
-          checked={playInLoop}
-          onChange={(e) => setPlayInLoop(e.target.checked)}
+          checked={isOn}
+          onChange={(e) => setIsOn(e.target.checked)}
         />{" "}
-        Play in Loop
+        {isOn ? "off" : "on"}
       </label>
     </div>
   );
