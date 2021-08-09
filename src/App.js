@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Controller from "./components/Controller";
 import Header from "./components/Header";
@@ -17,6 +17,7 @@ import file9 from "./pads/SilentStar_120_Em_OrganSynth.mp3";
 
 function App() {
   const [playing, setPlaying] = useState(false);
+  const [seconds, setSeconds] = useState(1);
   const [pads, setPads] = useState([
     { src: file1, name: "funk" },
     { src: file2, name: "breakbeats" },
@@ -29,11 +30,30 @@ function App() {
     { src: file9, name: "SilentStar" },
   ]);
 
+  // Interval of 8 seconds for the Progress bar
+  useEffect(() => {
+    if (playing) {
+      const interval = setInterval(() => {
+        seconds === 7
+          ? setSeconds((seconds) => seconds - 7)
+          : setSeconds((seconds) => seconds + 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else {
+      setSeconds(0);
+    }
+  }, [seconds, playing]);
+
   return (
     <div className="App">
       <Header />
       <Controller setPlaying={setPlaying} playing={playing} />
-      <Board pads={pads} playing={playing} />
+      <Board
+        pads={pads}
+        playing={playing}
+        seconds={seconds}
+        setSeconds={setSeconds}
+      />
     </div>
   );
 }

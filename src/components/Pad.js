@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-
-export default function Pad({ src, playing, name }) {
+import ProgressBar from "./ProgressBar";
+export default function Pad({ src, playing, name, seconds, setSeconds }) {
   const [isOn, setIsOn] = useState(false);
-
+  const [percents, setPercents] = useState(0);
   const audioTune = useRef(new Audio(src));
 
+  // Loading the audio
   useEffect(() => {
     audioTune.current.load();
   }, []);
 
+  // Play and stop the sounds
   useEffect(() => {
     if (playing && isOn) {
       playSound();
@@ -16,6 +18,11 @@ export default function Pad({ src, playing, name }) {
       stopSound();
     }
   }, [playing, isOn]);
+
+  // Fill the progress bar
+  useEffect(() => {
+    setPercents(seconds * 14.28);
+  }, [seconds]);
 
   // play audio sound
   const playSound = () => {
@@ -27,15 +34,11 @@ export default function Pad({ src, playing, name }) {
   const stopSound = () => {
     audioTune.current.pause();
     audioTune.current.currentTime = 0;
+    setPercents(0);
   };
 
-  // pause audio sound
-  //   const pauseSound = () => {
-  //     audioTune.pause();
-  //   };
-
   return (
-    <div>
+    <div className="padDiv">
       <h4>{name}</h4>
       <label>
         <input
@@ -45,6 +48,7 @@ export default function Pad({ src, playing, name }) {
         />{" "}
         {isOn ? "off" : "on"}
       </label>
+      {isOn && <ProgressBar percents={percents} />}
     </div>
   );
 }
