@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: steelblue;
+  background-size: cover;
 }
 
 .boardContainer {
@@ -19,4 +21,9 @@
   border: lightslategray solid 1px;
   border-radius: 10px;
   box-shadow: black 0 0 5px;
+  background-color: rosybrown;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5);
 }

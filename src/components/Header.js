@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Header() {
   return (
-    <div>
-      <h1>Loop Machine</h1>
+    <div style={{ marginTop: 0 }}>
+      <h1 style={{ marginTop: 0 }}>Loop Machine</h1>
     </div>
   );
 }

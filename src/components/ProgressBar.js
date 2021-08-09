@@ -9,13 +9,12 @@ export default function ProgressBar({ percents }) {
         width: "80%",
         margin: "auto",
         marginTop: "25px",
-        color: "blue",
         border: "1px solid black",
         borderRadius: "2px",
-        backgroundColor: "whitesmoke",
+        backgroundColor: "darkgrey",
       }}
     >
-      <Progress completed={percents} />
+      <Progress color="darkgreen" completed={percents} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Controller from "./components/Controller";
 import Header from "./components/Header";
@@ -17,32 +17,45 @@ import file9 from "./pads/SilentStar_120_Em_OrganSynth.mp3";
 
 function App() {
   const [playing, setPlaying] = useState(false);
-  const [seconds, setSeconds] = useState(1);
+  const [seconds, setSeconds] = useState(0);
   const [pads, setPads] = useState([
-    { src: file1, name: "funk" },
-    { src: file2, name: "breakbeats" },
-    { src: file3, name: "bass" },
-    { src: file4, name: "electric guitar" },
-    { src: file5, name: "StompySlosh" },
-    { src: file6, name: "Groove" },
-    { src: file7, name: "MazePolitics" },
-    { src: file8, name: "PAS3GROOVE" },
-    { src: file9, name: "SilentStar" },
+    { id: 0, src: file1, name: "funk", state: "OFF" },
+    { id: 1, src: file2, name: "breakbeats", state: "OFF" },
+    { id: 2, src: file3, name: "bass", state: "OFF" },
+    { id: 3, src: file4, name: "electric guitar", state: "OFF" },
+    { id: 4, src: file5, name: "StompySlosh", state: "OFF" },
+    { id: 5, src: file6, name: "Groove", state: "OFF" },
+    { id: 6, src: file7, name: "MazePolitics", state: "OFF" },
+    { id: 7, src: file8, name: "PAS3GROOVE", state: "OFF" },
+    { id: 8, src: file9, name: "SilentStar", state: "OFF" },
   ]);
+
+  const setPendingOn = useCallback(() => {
+    const newState = pads.map((pad) => {
+      if (pad.state === "PENDING") pad.state = "ON";
+      return pad;
+    });
+    setPads(newState);
+  }, [pads]);
 
   // Interval of 8 seconds for the Progress bar
   useEffect(() => {
     if (playing) {
       const interval = setInterval(() => {
-        seconds === 7
-          ? setSeconds((seconds) => seconds - 7)
-          : setSeconds((seconds) => seconds + 1);
+        if (seconds === 7) {
+          setSeconds(0);
+          return;
+        }
+        if (seconds === 0) setPendingOn();
+        setSeconds((seconds) => seconds + 1);
       }, 1000);
-      return () => clearInterval(interval);
+      return () => {
+        clearInterval(interval);
+      };
     } else {
       setSeconds(0);
     }
-  }, [seconds, playing]);
+  }, [seconds, playing, setPendingOn]);
 
   return (
     <div className="App">
@@ -50,6 +63,7 @@ function App() {
       <Controller setPlaying={setPlaying} playing={playing} />
       <Board
         pads={pads}
+        setPads={setPads}
         playing={playing}
         seconds={seconds}
         setSeconds={setSeconds}
