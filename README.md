@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Loop-machine
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Loop-machine is an application that simulates a DJ board,
+The board has pads with different sounds,
+and you can create different music from them when you combine them differently
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+Follow below steps to run project on your machine
 
-### `npm start`
+1. Clone [this repository](https://github.com/ido-leybo/Loop-machine)
+2. Run `npm install` command in the terminal to install dependencies
+3. Execute `npm start` command to run the project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Reference Website: \*\* \*\*
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## What the Loop-machine can do:
 
-### `npm test`
+- The app has 9 pads and each has a different melody that lasts 8 seconds,
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  ![show pads board](./src/readme/ScreenShot_5.png)
 
-### `npm run build`
+  By pressing a certain pad it switches to 'On' mode and waits for the board to turn on,
+  until the board turn on the pad in 'pending' mode.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  You can click on several pads to play together.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  ![show how to turn on the pads](./src/readme/gif_1.gif)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- When the play button is clicked all the pads in 'on' mode will start playing at the same time,
 
-### `npm run eject`
+  if we want to add another pad during play,
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  click it and it will enter 'pending' mode until the 8 seconds are over and the loop restarts then it will start playing in sync with the other pads.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  ![show what happend after press 'play' button ](./src/readme/gif_2.gif)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- If we want to turn off a particular pad then we can click on it and it will turn off immediately,
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  ![show that pad turn off immediately](./src/readme/gif_4.gif)
 
-## Learn More
+- if we want to turn off the whole board we press the pause button and it will basically reset the whole board immediately
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  ![show that board turn off immediately and reset everything](./src/readme/gif_3.gif)
