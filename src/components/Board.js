@@ -1,5 +1,6 @@
 import React from "react";
 import Pad from "./Pad";
+import PadsRow from "./PadsRow";
 export default function Board({ pads, playing, seconds, setSeconds, setPads }) {
   const onOffClick = (id) => {
     const newPad = pads.find((currentPad) => currentPad.id === id);
@@ -10,19 +11,28 @@ export default function Board({ pads, playing, seconds, setSeconds, setPads }) {
     setPads(newState);
   };
 
+  const twoDPads = pads.reduce(
+    (rows, key, index) =>
+      (index % 3 === 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) &&
+      rows,
+    []
+  );
+
   return (
     <div className="boardContainer">
-      {pads &&
-        pads.map((pad) => (
-          <Pad
-            pad={pad}
-            playing={playing}
-            seconds={seconds}
-            setSeconds={setSeconds}
-            onOffClick={onOffClick}
-            key={pad.id}
-          />
-        ))}
+      {twoDPads &&
+        twoDPads.map((pads, i) => {
+          return (
+            <PadsRow
+              pads={pads}
+              playing={playing}
+              seconds={seconds}
+              setSeconds={setSeconds}
+              onOffClick={onOffClick}
+              key={i}
+            />
+          );
+        })}
     </div>
   );
 }

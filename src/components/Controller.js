@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import PlayPause from "./PlayPause";
 
-import { ReactMediaRecorder } from "react-media-recorder";
+// import { ReactMediaRecorder } from "react-media-recorder";
 
 export default function Controller({ setPlaying, playing }) {
-  const [isRecording, setIsRecording] = useState(false);
+  // const [isRecording, setIsRecording] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(true);
 
-  const startRec = () => {
-    // startRecording();
-    setIsRecording(true);
-  };
+  // const startRec = () => {
+  //   // startRecording();
+  //   setIsRecording(true);
+  // };
 
-  const stopRec = () => {
-    // stopRecording();
-    setIsRecording(false);
-  };
+  // const stopRec = () => {
+  //   // stopRecording();
+  //   setIsRecording(false);
+  // };
 
   const toggle = () => {
     setPlaying(!playing);
@@ -40,9 +40,9 @@ export default function Controller({ setPlaying, playing }) {
       >
         <PlayPause buttonToShow={showPlayButton ? "play" : "pause"} />{" "}
       </button>
-      <button onClick={isRecording ? () => stopRec() : () => startRec()}>
+      {/*<button onClick={isRecording ? () => stopRec() : () => startRec()}>
         {isRecording ? "Stop Recording" : "Record"}
-      </button>
+      </button>*/}
     </div>
   );
 }

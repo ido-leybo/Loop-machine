@@ -1,8 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import ProgressBar from "./ProgressBar";
-export default function Pad({ playing, seconds, setSeconds, onOffClick, pad }) {
+export default function Pad({ playing, seconds, onOffClick, pad }) {
   const [percents, setPercents] = useState(0);
   const audioTune = useRef();
+  const [className, setClassName] = useState("padDiv-off");
+
+  // check the state of the pad
+  const checkStateAndSetClass = useCallback(() => {
+    if (pad.state === "PENDING") setClassName("padDiv-pending");
+    else if (pad.state === "OFF") setClassName("padDiv-off");
+    else {
+      onOffClick(pad.id);
+      setClassName("padDiv-on");
+    }
+  }, [onOffClick, pad.state, pad.id]);
 
   // Loading the audio
   useEffect(() => {
@@ -14,10 +25,12 @@ export default function Pad({ playing, seconds, setSeconds, onOffClick, pad }) {
   useEffect(() => {
     if (playing && pad.state === "ON") {
       playSound();
+      setClassName("padDiv-on");
     } else {
       stopSound();
+      checkStateAndSetClass();
     }
-  }, [playing, pad.state]);
+  }, [playing, pad.state, checkStateAndSetClass]);
 
   // Fill the progress bar
   useEffect(() => {
@@ -44,17 +57,17 @@ export default function Pad({ playing, seconds, setSeconds, onOffClick, pad }) {
   };
 
   return (
-    <div className="padDiv">
-      <h4>{pad.name}</h4>
-      <label>
-        <input
-          type="checkbox"
-          style={{ backgroundColor: "black" }}
-          checked={pad.state === "ON"}
-          onChange={() => onOffClick(pad.id)}
-        />{" "}
-        {pad.state}
-      </label>
+    <div
+      className={className}
+      onClick={() => {
+        onOffClick(pad.id);
+        checkStateAndSetClass();
+      }}
+    >
+      <h3>
+        <img src={pad.logo} width={40} height={40} alt={pad.name} />
+      </h3>
+      <h3 className="onOffText">{pad.state}</h3>
       {pad.state === "ON" && <ProgressBar percents={percents} />}
     </div>
   );

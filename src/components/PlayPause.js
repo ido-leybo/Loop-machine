@@ -18,6 +18,7 @@ const PlayPause = React.memo(function PlayPause({ buttonToShow }) {
   const [pNextPath, pCurrentPath] =
     buttonToShow === "play" ? [pauseFull, pauseEmpty] : [pauseEmpty, pauseFull];
   const pauseInterpolator = interpolate(pNextPath, pCurrentPath);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
