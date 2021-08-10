@@ -1,5 +1,4 @@
 import React from "react";
-import Pad from "./Pad";
 import PadsRow from "./PadsRow";
 export default function Board({ pads, playing, seconds, setSeconds, setPads }) {
   const onOffClick = (id) => {

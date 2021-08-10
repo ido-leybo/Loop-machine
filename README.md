@@ -18,7 +18,7 @@ Reference Website: \*\* https://loop-machine1.herokuapp.com/ \*\*
 
 - The app has 9 pads and each has a different melody that lasts 8 seconds,
 
-  ![show pads board](./src/readme/ScreenShot_5.png)
+  ![show pads board](./src/readme/gif_0.gif)
 
   By pressing a certain pad it switches to 'On' mode and waits for the board to turn on,
   until the board turn on the pad in 'pending' mode.
