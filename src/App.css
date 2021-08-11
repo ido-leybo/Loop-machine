@@ -28,12 +28,12 @@
   text-align: center;
   border: lightslategray solid 1px;
   border-radius: 10px;
-  box-shadow: black 0 0 5px;
-  background-color: rosybrown;
+  box-shadow: red 0 0 18px;
+  background-color: gray;
 }
 
 .padDiv-off:hover {
-  background-color: blue;
+  background-color: orange;
   cursor: pointer;
 }
 
@@ -59,7 +59,7 @@
   text-align: center;
   border: lightslategray solid 1px;
   border-radius: 10px;
-  box-shadow: black 0 0 5px;
+  box-shadow: rgb(11, 177, 11) 0 0 18px;
   background-color: lime;
 }
 
@@ -73,6 +73,48 @@
     1px 1px 10px 1px rgba(202, 145, 143, 0);
 }
 
+.headerTitle {
+  color: #fff;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 40px;
+}
+
+/* record controls */
+.startRecButton {
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.stopRecButton {
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.audioPlayer {
+  cursor: pointer;
+  height: 30px;
+}
+
+.isRecording {
+  background-color: red;
+  width: 100px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.mainRecordButton {
+  border-radius: 20px;
+  background-color: rgb(58, 58, 187);
+  color: #fff;
+  height: 30px;
+}
+
+.recordControlButtons {
+  margin: 5px;
+}
 /* css when open in phone */
 @media only screen and (max-width: 768px) {
   .boardContainer {
@@ -114,5 +156,8 @@
   }
   .progressBar {
     margin-top: 0;
+  }
+  .headerTitle {
+    font-size: 20px;
   }
 }

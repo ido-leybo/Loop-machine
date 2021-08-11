@@ -1,22 +1,41 @@
 import React, { useState } from "react";
 import PlayPause from "./PlayPause";
 
-// import { ReactMediaRecorder } from "react-media-recorder";
+import { ReactMediaRecorder } from "react-media-recorder";
 
 export default function Controller({ setPlaying, playing }) {
-  // const [isRecording, setIsRecording] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(true);
+  const [record, setRecord] = useState(false);
 
-  // const startRec = () => {
-  //   // startRecording();
-  //   setIsRecording(true);
-  // };
+  const startRec = () => {
+    startRecording();
+    setIsRecording(true);
+    setRecord(true);
+  };
 
-  // const stopRec = () => {
-  //   // stopRecording();
-  //   setIsRecording(false);
-  // };
+  const stopRec = () => {
+    setIsRecording(false);
+    setRecord(false);
+  };
 
+  const startRecording = () => {
+    return (
+      <ReactMediaRecorder
+        audio
+        render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
+          <div>
+            <p>{status}</p>
+            <button onClick={startRecording}>Start Recording</button>
+            <button onClick={stopRecording}>Stop Recording</button>
+            <audio src={mediaBlobUrl} controls />
+          </div>
+        )}
+      />
+    );
+  };
+
+  // toggle between 'play' & 'pause' buttons
   const toggle = () => {
     setPlaying(!playing);
     setShowPlayButton(!showPlayButton);
@@ -27,7 +46,7 @@ export default function Controller({ setPlaying, playing }) {
       <button
         style={{
           border: "none",
-          backgroundColor: "#ff8d8d",
+          backgroundColor: "rgb(58, 58, 187)",
           boxShadow: "0 0 4px 2px rgba(0,0,0,.2)",
           cursor: "pointer",
           height: 40,
@@ -40,9 +59,31 @@ export default function Controller({ setPlaying, playing }) {
       >
         <PlayPause buttonToShow={showPlayButton ? "play" : "pause"} />{" "}
       </button>
-      {/*<button onClick={isRecording ? () => stopRec() : () => startRec()}>
-        {isRecording ? "Stop Recording" : "Record"}
-      </button>*/}
+      <button
+        className="mainRecordButton"
+        onClick={isRecording ? () => stopRec() : () => startRec()}
+      >
+        {isRecording ? "Stop ↩" : "Record ⬇"}
+      </button>
+      {record && (
+        <ReactMediaRecorder
+          audio
+          render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
+            <div>
+              <p className="isRecording">{status}</p>
+              <div className="recordControlButtons">
+                <button className="startRecButton" onClick={startRecording}>
+                  Start⏯
+                </button>
+                <button className="stopRecButton" onClick={stopRecording}>
+                  Stop⏸
+                </button>
+              </div>
+              <audio className="audioPlayer" src={mediaBlobUrl} controls />
+            </div>
+          )}
+        />
+      )}
     </div>
   );
 }

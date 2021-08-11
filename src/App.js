@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
 import "./App.css";
+import React, { useState, useEffect } from "react";
 import Controller from "./components/Controller";
 import Header from "./components/Header";
 import Board from "./components/Board";
@@ -29,41 +29,34 @@ import CREEPY from "./logos/CREEPY.png";
 function App() {
   const [playing, setPlaying] = useState(false);
   const [seconds, setSeconds] = useState(0);
+  const [cycleStart, setCycleStart] = useState(true);
   const [pads, setPads] = useState([
-    { id: 0, src: file1, name: "funk", state: "OFF", logo: FUNK },
-    { id: 1, src: file2, name: "breakbeats", state: "OFF", logo: BEAT },
-    { id: 2, src: file3, name: "bass", state: "OFF", logo: BASS },
+    { id: 0, src: file1, name: "funk", logo: FUNK },
+    { id: 1, src: file2, name: "breakbeats", logo: BEAT },
+    { id: 2, src: file3, name: "bass", logo: BASS },
     {
       id: 3,
       src: file4,
       name: "electric guitar",
-      state: "OFF",
       logo: ELECTRIC,
     },
-    { id: 4, src: file5, name: "StompySlosh", state: "OFF", logo: DRUM },
-    { id: 5, src: file6, name: "Groove", state: "OFF", logo: GROOVE },
-    { id: 6, src: file7, name: "MazePolitics", state: "OFF", logo: ALIEN },
-    { id: 7, src: file8, name: "PAS3GROOVE", state: "OFF", logo: SNARE },
-    { id: 8, src: file9, name: "SilentStar", state: "OFF", logo: CREEPY },
+    { id: 4, src: file5, name: "StompySlosh", logo: DRUM },
+    { id: 5, src: file6, name: "Groove", logo: GROOVE },
+    { id: 6, src: file7, name: "MazePolitics", logo: ALIEN },
+    { id: 7, src: file8, name: "PAS3GROOVE", logo: SNARE },
+    { id: 8, src: file9, name: "SilentStar", logo: CREEPY },
   ]);
-
-  const setPendingOn = useCallback(() => {
-    const newState = pads.map((pad) => {
-      if (pad.state === "PENDING") pad.state = "ON";
-      return pad;
-    });
-    setPads(newState);
-  }, [pads]);
 
   // Interval of 8 seconds
   useEffect(() => {
     if (playing) {
       const interval = setInterval(() => {
+        if (cycleStart) setCycleStart(false);
         if (seconds === 7) {
+          setCycleStart(true);
           setSeconds(0);
           return;
         }
-        if (seconds === 0) setPendingOn();
         setSeconds((seconds) => seconds + 1);
       }, 1000);
       return () => {
@@ -72,7 +65,7 @@ function App() {
     } else {
       setSeconds(0);
     }
-  }, [seconds, playing, setPendingOn]);
+  }, [seconds, playing, cycleStart]);
 
   return (
     <div className="App">
@@ -84,6 +77,7 @@ function App() {
         playing={playing}
         seconds={seconds}
         setSeconds={setSeconds}
+        cycleStart={cycleStart}
       />
     </div>
   );
