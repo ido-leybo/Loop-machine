@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { animated, Spring } from "react-spring";
 import { interpolate } from "flubber";
 
+// component of 'play' & 'pause' buttons
 const PlayPause = React.memo(function PlayPause({ buttonToShow }) {
   const playPath = "M3 22v-20l18 10-18 10z";
   const pausePath = "M11 22h-4v-20h4v20z";

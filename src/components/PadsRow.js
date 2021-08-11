@@ -6,6 +6,7 @@ export default function PadsRow({
   seconds,
   setSeconds,
   onOffClick,
+  cycleStart,
 }) {
   return (
     <div className="PadsRow">
@@ -15,6 +16,7 @@ export default function PadsRow({
             <Pad
               pad={pad}
               playing={playing}
+              cycleStart={cycleStart}
               seconds={seconds}
               setSeconds={setSeconds}
               onOffClick={onOffClick}

@@ -1,15 +1,13 @@
 import React from "react";
 import PadsRow from "./PadsRow";
-export default function Board({ pads, playing, seconds, setSeconds, setPads }) {
-  const onOffClick = (id) => {
-    const newPad = pads.find((currentPad) => currentPad.id === id);
-    if (newPad.state !== "OFF") newPad.state = "OFF";
-    else newPad.state = "PENDING";
-
-    const newState = pads.map((pad) => (pad.id === id ? { ...newPad } : pad));
-    setPads(newState);
-  };
-
+export default function Board({
+  pads,
+  playing,
+  seconds,
+  setSeconds,
+  cycleStart,
+}) {
+  // reduce the main array into 3 arrays
   const twoDPads = pads.reduce(
     (rows, key, index) =>
       (index % 3 === 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) &&
@@ -24,10 +22,10 @@ export default function Board({ pads, playing, seconds, setSeconds, setPads }) {
           return (
             <PadsRow
               pads={pads}
+              cycleStart={cycleStart}
               playing={playing}
               seconds={seconds}
               setSeconds={setSeconds}
-              onOffClick={onOffClick}
               key={i}
             />
           );
