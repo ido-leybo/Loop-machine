@@ -20,8 +20,7 @@ Reference Website: \*\* https://loop-machine1.herokuapp.com/ \*\*
 
   ![show pads board](./readme/gif_0.gif)
 
-  By pressing a certain pad it switches to 'On' mode and waits for the board to turn on,
-  until the board turn on the pad in 'pending' mode.
+- By pressing a certain pad it switches to 'On' mode and waits for the board to turn on.
 
   You can click on several pads to play together.
 
@@ -31,7 +30,7 @@ Reference Website: \*\* https://loop-machine1.herokuapp.com/ \*\*
 
   if we want to add another pad during play,
 
-  click it and it will enter 'pending' mode until the 8 seconds are over and the loop restarts then it will start playing in sync with the other pads.
+  click it and it will waiting until the 8 seconds are over and the loop restarts then it will start playing in sync with the other pads.
 
   ![show what happend after press 'play' button ](./readme/gif_2.gif)
 
@@ -42,3 +41,7 @@ Reference Website: \*\* https://loop-machine1.herokuapp.com/ \*\*
 - if we want to turn off the whole board we press the pause button and it will basically reset the whole board immediately
 
   ![show that board turn off immediately and reset everything](./readme/gif_3.gif)
+
+- It is possible to record a session together with a microphone, and immediately after the recording you can hear and download the same recording and save it on your machine.
+
+![show how to use the record](./readme/gif_5.gif)
